@@ -1,0 +1,311 @@
+body{
+    background-color: rgb(5, 38, 67);
+    font-family: "Montserrat", sans-serif ;
+    
+}
+
+.left-container hr{
+     color: rgb(8, 228, 11);
+     
+}
+
+.right-container hr{
+    color: rgb(8, 228, 11);
+    
+}
+
+.row{
+    background-color: rgb(1, 39, 68);
+    padding-bottom: 10%;
+}
+
+.signup-content a{
+    text-decoration: none;
+    color:rgb(1, 39, 68);
+}
+
+.signup-content a:hover{
+    text-decoration: none;
+    color:rgb(5, 154, 77)
+}
+
+.signup-content a:focus{
+    text-decoration: none;
+    color:rgb(94, 2, 47)
+}
+
+.login-content a{
+    text-decoration: none;
+    color:rgb(1, 39, 68);
+
+}
+
+.login-content a:hover{
+    text-decoration: none;
+    color:greenyellow
+}
+
+.login-content a:focus{
+    text-decoration: none;
+    color:rgb(94, 2, 47)
+}
+.login-content h1{
+    color:  rgb(1, 39, 68);
+    
+}
+
+.login-content form{
+    color:  rgb(1, 39, 68);
+    
+}
+
+.login-content p{
+    color:  rgb(1, 39, 68);
+    
+} 
+.signup-content p{
+    color:  rgb(1, 39, 68);
+   
+}
+
+.signup-content h1{
+    color:  rgb(1, 39, 68);
+    
+}
+
+.signup-content form{
+    color:  rgb(1, 39, 68);
+    
+}
+
+.fg-content p{
+    color:  rgb(1, 39, 68);
+   
+}
+
+.fg-content h1{
+    color:  rgb(1, 39, 68);
+    
+}
+
+.fg-content form{
+    color:  rgb(1, 39, 68);
+    
+}
+
+
+
+
+
+
+.fg-content a{
+    text-decoration: none;
+    color:  rgb(1, 39, 68);
+}
+
+.fg-content a:hover{
+    text-decoration: none;
+    color:greenyellow;
+}
+
+.fg-content a:focus{
+    text-decoration: none;
+    color:rgb(94, 2, 47)
+}
+
+
+.login-content form input:focus{
+    color:greenyellow;
+}
+
+
+
+a:visited{
+    text-decoration: none;
+}
+
+.submit{
+    margin-top: 10px;
+    border-radius: 10%;
+    width: 75px;
+    background-color: rgb(59, 178, 248);
+    border-width: 0.5px;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    transition: transform 0.4s ease;
+}
+
+.submit:hover{
+    background-color: rgb(23, 209, 76);
+    border-color: rgb(10, 7, 7);
+    color: rgb(14, 11, 11);
+    transform: scale(1.05);
+}
+
+h1{
+    font-size: large;
+}
+
+.login-label{
+    font-family: "Anta", sans-serif;
+    padding-bottom: 1.5rem;
+    color: rgb(37, 160, 242);
+
+}
+
+.signup-label{
+    font-family: "Anta", sans-serif;
+    padding-bottom: 2rem;
+
+}
+
+.fg-label{
+    font-family: "Anta", sans-serif;
+    padding-bottom: 2rem;
+}
+
+.sulink{
+    margin-top: 15px;
+}
+
+.loglink{
+    margin-top: 20px;
+}
+
+/* #sulink, #loglink, #floglink{
+    color: rgb(21, 188, 230);;
+} */
+
+/* #sulink, #loglink, #floglink:hover{
+    color: rgb(23, 209, 76);;
+} */
+
+/* #sulink, #loglink, #floglink:focus{
+    color: rgb(221, 45, 22);;
+} */
+
+.left-container{
+    text-align: center;
+    font-size: xx-large;
+    margin-top: 17.5rem;
+    margin-left: 8rem;
+
+}
+
+
+.fb-icon, .gg-icon, .tw-icon{
+    padding-right:1.5rem;
+    padding-left: 1.5rem;
+    color: black;
+}
+
+.fgplink{
+    display:block;
+}
+
+
+
+.login-container{
+    margin-top: 7.5rem;
+    margin-left: 6rem;
+    
+}
+
+.login-content{
+    margin-top: 3rem;
+    margin-left: 15px;
+
+}
+
+.fb-btn, .google-btn, .twitter-btn{
+    size: 50px;
+}
+
+.left-content{
+    font-family: "Anta", sans-serif;
+    color: rgb(8, 228, 11);
+}
+
+.left-container a{
+    display: inline-block;
+    color: rgb(8, 228, 11);
+    transition: transform 0.4s ease;
+}
+
+.left-container a:hover{
+    color: rgb(8, 228, 217);
+    transform: scale(1.27);
+}
+
+.left-container a:focus{
+    color: rgb(217, 132, 246);
+}
+
+.signup-container{
+    margin-top: 7.5rem;
+    margin-left: 8rem;
+}
+
+.signup-content{
+    margin-top: 3rem;
+    margin-left: 15px;
+}
+
+.right-container{
+    text-align: center;
+    font-size: xx-large;
+    margin-top: 17.5rem;
+    margin-right: 8rem;
+}
+
+.right-container a{
+    display: inline-block;
+    color: rgb(8, 228, 11);
+    transition: transform 0.4s ease;
+}
+
+.right-container a:hover{
+    color: rgb(8, 228, 217);
+    transform: scale(1.27);
+}
+
+.right-container a:focus{
+    color: rgb(217, 132, 246);
+}
+
+.right-content{
+    font-family: "Anta", sans-serif;
+    color: rgb(8, 228, 11);
+}
+
+.fg-container{
+    margin-top: 5.5rem;
+}
+
+.fg-content{
+    margin-top: 2rem;
+    margin-left: .75rem;
+}
+
+#username, #password{
+    border-width: 1px;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    background-color: transparent;
+    width: 90%;
+    margin: 5px;
+}
+
+#username, #password:focus{
+    outline: none;
+}
+
+#rmbr, .rmbr{
+    margin-top: 10px;
+}
+
+::placeholder{
+    font-style: italic;
+    
+}

@@ -16,16 +16,16 @@
 <body>
     <div class="row">
         <div class="col-md-6">
-            <div class="card signup-container" style="width: 25rem; height: 30rem; border: 3px solid #000000;">
+            <div class="card signup-container" style="width: 25rem; height: 33rem; border: 3px solid #000000;">
                 <div class="card-body signup-content">
                     <h1 class="card-title signup-label">SIGN UP</h1>
-                    <form action="">
-                        <label>Enter username:</label> <br>
-                        <input type="text" id="username" name="username" placeholder="Enter Username"><br>
-                        <label>Enter password:</label><br>
-                        <input type="password" id="password" name="password" placeholder="Enter password"><br>
-                        <input class="submit" type="submit" value="Submit"><br>
-                    </form>
+                    <label>Enter username:</label> <br>
+                    <input type="text" id="username" name="username" placeholder="Enter Username"><br>
+                    <div id="usernameError" class="error"></div>
+                    <label>Enter password:</label><br>
+                    <input type="password" id="password" name="password" placeholder="Enter password"><br>
+                    <div id="passwordError" class="error"></div>
+                    <button class="submit" onclick="validateForm()">Submit</button><br>
                     <p class="loglink">Have an account? Click <a href="login.html" id="loglink" >"here"</a> to log in!!</p> 
                 </div>
             </div>
@@ -40,9 +40,7 @@
             </div>
         </div>
     </div>
-    <div>
-       
-    </div>
+    <script src="js/index.js"></script>
     
 </body>
 </html>

@@ -94,10 +94,6 @@ body{
 }
 
 
-
-
-
-
 .fg-content a{
     text-decoration: none;
     color:  rgb(1, 39, 68);
@@ -114,9 +110,9 @@ body{
 }
 
 
-.login-content form input:focus{
+/* .login-content form input:focus{
     color:greenyellow;
-}
+} */
 
 
 
@@ -207,7 +203,7 @@ h1{
 
 .login-container{
     margin-top: 7.5rem;
-    margin-left: 6rem;
+    margin-left: 8rem;
     
 }
 
@@ -243,7 +239,7 @@ h1{
 
 .signup-container{
     margin-top: 7.5rem;
-    margin-left: 8rem;
+    margin-left: 10rem;
 }
 
 .signup-content{
@@ -280,6 +276,7 @@ h1{
 
 .fg-container{
     margin-top: 5.5rem;
+    margin-left: 1rem;
 }
 
 .fg-content{
@@ -287,18 +284,23 @@ h1{
     margin-left: .75rem;
 }
 
-#username, #password{
+#username, #password, #confirmPassword{
     border-width: 1px;
     border-top-width: 0;
     border-left-width: 0;
     border-right-width: 0;
     background-color: transparent;
-    width: 90%;
+    border-color: black;
+    width: 305px;
     margin: 5px;
+    transition: transform 0.4s ease;
 }
 
-#username, #password:focus{
+#username:focus, #password:focus, #confirmPassword:focus{
     outline: none;
+    border-color: yellowgreen;
+    /* width: ; */
+    transform: scaleX(1.05);
 }
 
 #rmbr, .rmbr{
@@ -308,4 +310,8 @@ h1{
 ::placeholder{
     font-style: italic;
     
+}
+
+.error{
+    color: red;
 }

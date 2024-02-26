@@ -104,6 +104,10 @@ body{
     color:greenyellow;
 }
 
+.validunamebtn{
+    display: inline;
+}
+
 .fg-content a:focus{
     text-decoration: none;
     color:rgb(94, 2, 47)
@@ -131,11 +135,23 @@ a:visited{
     transition: transform 0.4s ease;
 }
 
-.submit:hover{
+.submit:not([disabled]):hover{
     background-color: rgb(23, 209, 76);
     border-color: rgb(10, 7, 7);
     color: rgb(14, 11, 11);
     transform: scale(1.05);
+}
+
+.submit:disabled:hover{
+    /* margin-top: 10px;
+    border-radius: 10%;
+    width: 75px;
+    background-color: rgb(59, 178, 248);
+    border-width: 0.5px;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px; */
+    /* transition: transform 0.4s ease; */
+    cursor: not-allowed;
 }
 
 h1{
@@ -314,4 +330,21 @@ h1{
 
 .error{
     color: red;
+    /* width: 39%; */
+}
+
+.avlblitychecker{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8%;
+    /* width: 75px; */
+    background-color: rgb(59, 178, 248);
+    border-width: 0.5px;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    transition: transform 0.4s ease;
+}
+
+.avlblitychecker:hover{
+    transform: scale(1.05);
 }

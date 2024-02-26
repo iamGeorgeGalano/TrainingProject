@@ -25,8 +25,8 @@
                     <label>Enter password:</label><br>
                     <input type="password" id="password" name="password" placeholder="Enter password"><br>
                     <div id="passwordError" class="error"></div>
-                    <button class="submit" onclick="validateForm()">Submit</button><br>
-                    <p class="loglink">Have an account? Click <a href="login.html" id="loglink" >"here"</a> to log in!!</p> 
+                    <button class="submit" onclick="validateForm(); saveData(); goToLoginPage();">Submit</button><br>
+                    <p class="loglink">Have an account? Click <a id="logLink" style="text-decoration: none; color:rgb(1, 39, 68); transition: color 0.3s;" onmouseover="this.style.color='greenyellow'" onmouseout="this.style.color='rgb(1, 39, 68)';" onclick="goToLoginPage()">"here"</a> to log in!!</p> 
                 </div>
             </div>
         </div>

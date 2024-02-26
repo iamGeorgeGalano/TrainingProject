@@ -23,15 +23,18 @@
                 <div class="card-body fg-content">
                     <h1 class="fg-label">FORGOT PASSWORD</h1>
                     <label>Username:</label><br>
-                    <input type="text" id="username" name="username" placeholder="Enter Username"><br>
-                    <div id="usernameError" class="error"></div>
+                    <input type="text" id="username" name="username" placeholder="Enter Username">
+                    <div class="validunamebtn">
+                        <button class="avlblitychecker" onclick="fgPasswordCondition()">Check availability</button>
+                        <div id="usernameError" class="error" style="display: inline-block; width: 55%; margin-left: 10px;"></div>
+                    </div>
                     <label>Enter new password:</label><br>
-                    <input type="password" id="password" name="password" placeholder="Enter new password"><br>
+                    <input type="password" id="password" name="password" placeholder="Enter new password" disabled><br>
                     <div id="passwordError" class="error"></div>
                     <label>Confirm password:</label><br>
-                    <input type="password" id="confirmPassword" name="password" placeholder="Confirm new password"><br>
+                    <input type="password" id="confirmPassword" name="password" placeholder="Confirm new password" disabled><br>
                     <div id="passwordError1" class="error"></div>
-                    <button class="submit" onclick="validateForm(); validatePassword();">Submit</button><br>
+                    <button class="submit" id="fgButton" onclick="changePassword();" disabled>Submit</button><br>
                     <p class="loglink">Have an account? Click <a href="login.html" id="floglink">"here"</a> to log in!!</p>
                 </div>
                 

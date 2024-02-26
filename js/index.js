@@ -1,32 +1,54 @@
-var input =document.getElementById("username");
+// var input =document.getElementById("username");
 
-input.addEventListener("input", function() {
+// input.addEventListener("input", function() {
     
-    if (input.value.length > 10){
+//     if (input.value.length > 10){
 
-        input.value = input.value.slice(0, 10);
-    }
+//         input.value = input.value.slice(0, 10);
+//     }
 
+// });
+
+$(document).ready(function(){
+    var $input = $('#username');
+
+    $input.on("input", function(){
+        if ($input.val().length > 10){
+            $input.val($input.val().slice(0,10));
+        }
+    });
 });
 
-function goToSuPage() {
-    window.location.href = "signup.html";
-}
-
-function goToLoginPage() {
-    window.location.href = "login.html";
-}
-
-function goToFgPage(){
-    window.location.href = "fgpass.html";
-}
-
-// document.getElementById("logLink").onclick =function() {
-//     window.location.href = "login.html";
-// }
-// document.getElementById("suLink").onclick = function () {
+// function goToSuPage() {
 //     window.location.href = "signup.html";
 // }
+
+$(document).ready(function(){
+    $('#suLink').on('click',function(){
+        window.location.href = "signup.html";
+    });
+});
+
+// function goToLoginPage() {
+//     window.location.href = "login.html";
+// }
+
+$(document).ready(function(){
+    $('#logLink').on('click',function(){
+        window.location.href = "login.html";
+    });;
+});
+
+// function goToFgPage(){
+//     window.location.href = "fgpass.html";
+// }
+
+$(document).ready(function(){
+    $('#fgLink').on('click',function(){
+        window.location.href = "fgpass.html";
+    });
+});
+
 
 
 
@@ -45,7 +67,7 @@ function validateForm() {
         return;
     }
 
-    
+
     // Check if username is empty
     if (username.trim() === "") {
         document.getElementById("usernameError").innerText = "Username is required";
@@ -59,9 +81,6 @@ function validateForm() {
     // Check if password is empty
     if (password.trim() === "") {
         document.getElementById("passwordError").innerText = "Password is required";
-        return;
-    } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-        document.getElementById('usernameError').innerText = 'Username can only contain letters, numbers, and underscores.';
         return;
     }else{
         document.getElementById("passwordError").innerText = "";
@@ -88,36 +107,126 @@ function validatePassword() {
     return true;
 }
 
-function saveData() {
+// function saveData() {
 
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+//     var username = document.getElementById("username").value;
+//     var password = document.getElementById("password").value;
 
-    var userData = {
-        username: username,
-        password: password
-    };
+//     var userData = {
+//         username: username,
+//         password: password
+//     };
 
-    var jsonData = JSON.stringify(userData);
+//     var jsonData = JSON.stringify(userData);
 
-    localStorage.setItem('userData',jsonData);
+//     localStorage.setItem('userData',jsonData);
 
-    alert("Data save successfully!;")
-}
+//     alert("Data save successfully!;")
+// }
 
-function validateLogin (){
+$(document).ready(function(){
+    $('#sgSubmit').on('click', function(){
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var userData = {
+            username: username,
+            password: password
+        };
+        var jsonData = JSON.stringify(userData);
 
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+        if (username.trim() === "" && password.trim() === ""){
+            $('#usernameError').text('Please fill up this field.');
+            $('#passwordError').text('Please fill up this field.');
+        }else{
+            $('#usernameError').text('');
+            $('#passwordError').text('');
+        }
 
-    var userData = JSON.parse(localStorage.getItem('userData'));
+        if (username.trim()===""){
+            $('#usernameError').text('Please fill up this field.');
+        }else if (!/^[a-zA-Z0-9_]+$/.test(username)){
+            $('#usernameError').text('Username must only consists of letters, numbers, and underscore only')
+        }else if(password.trim()===""){
+            $('#passwordError').text('Please fill up this field');
+        }else{
+            $('#usernameError').text('')
+            $('#passwordError').text('')
+            localStorage.setItem('userData', jsonData)
+            window.location.href = "login.html";
+            alert("Data saved successfully.")
+        };
+    });
+});
 
-    if(userData && userData.username === username && userData.password === password){
-        alert("Login Successfully!");
-    }else{
-        alert("Please input correct credentials and try again.")
-    }
-}
+// function validateLogin (){
+
+//     var username = document.getElementById("username").value;
+//     var password = document.getElementById("password").value;
+
+//     var userData = JSON.parse(localStorage.getItem('userData'));
+
+//     if(userData && userData.username === username && userData.password === password){
+//         alert("Login Successfully!");
+//     }else{
+//         if (username.trim() === "" && password.trim() === "") {
+//             document.getElementById("usernameError").innerText = "Username is required";
+//             document.getElementById("passwordError").innerText = "Password is required";
+//             return;
+//         }
+//         if (username.trim() === "") {
+//             document.getElementById("usernameError").innerText = "Username is required";
+//             return;
+//         } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+//             document.getElementById('usernameError').innerText = 'Username can only contain letters, numbers, and underscores.';
+//             return;
+//         }else{
+//             document.getElementById("usernameError").innerText = "";
+//         }
+//         if (password.trim() === "") {
+//             document.getElementById("passwordError").innerText = "Password is required";
+//             return;
+//         } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+//             document.getElementById('usernameError').innerText = 'Username can only contain letters, numbers, and underscores.';
+//             return;
+//         }else{
+//             document.getElementById("passwordError").innerText = "";
+//         }
+//         alert("Please input correct credentials and try again.")
+        
+//     }
+// }
+
+$(document).ready(function(){
+    $('#liSubmit').on('click', function(){
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var userData = JSON.parse(localStorage.getItem('userData'));
+
+        if (userData && userData.username === username && userData.password === password){
+            alert("Login Successfully!!")
+        }else{
+            if (username.trim() === "" && password.trim() === ""){
+            $('#usernameError').text('Username is required');
+            $('#passwordError').text('Password is required');
+            return;
+        }
+
+        if (username.trim() === ""){
+            $('usernameError').text('Username is required.');
+            return;
+        }else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+            $('#usernameError').text('You input invalid content, Try again.');
+            return;
+        }else if (password.trim() === ""){
+            $('#passwordError').text('Password is required');
+        }else{
+            $('#usernameError').text('');
+            $('#passwordError').text('');
+            alert("Invalid credentials, please try again.");
+        }      
+      }       
+   });
+}); 
 
 function usernameValidator(validUsername){
 

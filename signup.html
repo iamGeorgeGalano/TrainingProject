@@ -15,7 +15,7 @@
     <title>SIGN UP</title>
 </head>
 <body>
-    <div class="row">
+    <div class="row" id="signupRow">
         <div class="col-md-6">
             <div class="card signup-container" style="width: 25rem; height: 33rem; border: 3px solid #000000;">
                 <div class="card-body signup-content">
@@ -26,6 +26,9 @@
                     <label>Enter password:</label><br>
                     <input type="password" id="password" name="password" placeholder="Enter password"><br>
                     <div id="passwordError" class="error"></div>
+                    <label>Email:</label><br>
+                    <input type="email" id="email" name="email" placeholder="example@mail.com"><br>
+                    <div id="emailError" class="error"></div>
                     <button class="submit" id="sgSubmit">Submit</button><br>
                     <p class="loglink">Have an account? Click <a id="logLink" style="text-decoration: none; color:rgb(1, 39, 68); transition: color 0.3s;" onmouseover="this.style.color='greenyellow'" onmouseout="this.style.color='rgb(1, 39, 68)';" onclick="goToLoginPage()">"here"</a> to log in!!</p> 
                 </div>

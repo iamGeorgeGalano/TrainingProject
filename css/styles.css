@@ -19,6 +19,13 @@ body{
     padding-bottom: 10%;
 }
 
+/* #loginRow{
+    opacity: 1;
+    transition: 0.5s ease;
+} */
+
+
+
 .signup-content a{
     text-decoration: none;
     color:rgb(1, 39, 68);
@@ -300,7 +307,7 @@ h1{
     margin-left: .75rem;
 }
 
-#username, #password, #confirmPassword{
+#username, #password, #confirmPassword, #email, #confirmUsername {
     border-width: 1px;
     border-top-width: 0;
     border-left-width: 0;
@@ -312,7 +319,7 @@ h1{
     transition: transform 0.4s ease;
 }
 
-#username:focus, #password:focus, #confirmPassword:focus{
+#username:focus, #password:focus, #confirmPassword:focus, #email:focus, #confirmUsername:focus{
     outline: none;
     border-color: yellowgreen;
     /* width: ; */

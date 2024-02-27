@@ -47,7 +47,13 @@ $(document).ready(function(){
     $('#fgLink').on('click',function(){
         window.location.href = "fgpass.html";
     });
+
+    $('#fgUsername').on('click', function(){
+        window.location.href = "changepass.html";
+    })
 });
+
+
 
 
 
@@ -122,18 +128,30 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('#sgSubmit').on('click', function(){
+        
+        function validateEmail(email){
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
         var username = $('#username').val();
         var password = $('#password').val();
+        var email = $('#email').val();
         
         var exData = localStorage.getItem('dataList');
         var exUser = exData ? JSON.parse(exData):[ ];
+        var emailExist = exUser.some(function(user){
+            return user.email == email;
+        });
 
-        if (username.trim() === "" && password.trim() === ""){
+        if (username.trim() === "" && password.trim() === "" && email.trim() == ""){
             $('#usernameError').text('Please fill up this field.');
             $('#passwordError').text('Please fill up this field.');
+            $('#emailError').text('Please fill up this field.');
         }else{
             $('#usernameError').text('');
             $('#passwordError').text('');
+            $('#emailError').text('');
         }
 
         if (username.trim()===""){
@@ -142,13 +160,21 @@ $(document).ready(function(){
             $('#usernameError').text('Username must only consists of letters, numbers, and underscore only')
         }else if(password.trim()===""){
             $('#passwordError').text('Please fill up this field');
-        }else{
+        }else if (email.trim() === ""){
+            $('#emailError').text('Please fill up this field.');
+        }else if(!validateEmail(email)){
+            $('#emailError').text('Please input valid email address');
+        }else if (emailExist){
+            $('#emailError').text('Email exists, use another email.')
+        }else {
             $('#usernameError').text('')
             $('#passwordError').text('')
+            $('#emailError').text('')
 
             var userData = {
                 username: username,
-                password: password
+                password: password,
+                email: email
             }
 
             exUser.push(userData);
@@ -278,9 +304,13 @@ $(document).ready(function(){
 
             for (var i = 0; i < storedData.length; i++){
                 var userData = storedData[i];
+
+               if (userData.username === validUsername){
+                return true;
+               }
             }
     
-            return (storedData !== null) && (userData.username == validUsername);
+           return false;
         }
 
         var username = $('#username').val();
@@ -294,6 +324,45 @@ $(document).ready(function(){
             usernameError.text('Username is not valid').css('color', 'red');
             newPasswordInput.prop('disabled', true);
             confirmPasswordInput.prop('disabled', true);
+            submitButton.prop('disabled', true);
+        }
+
+    });
+});
+
+$(document).ready(function(){
+
+    var emailError = $('#emailError');
+    var newUsernameInput = $('#username');
+    var confirmUsernameInput = $('#confirmUsername');
+    var submitButton = $('#fgUnButton');
+
+    $('#emChecker').on('click',function(){
+        function usernameValidator(validEmail){
+            var storedData = JSON.parse(localStorage.getItem('dataList'));
+
+            for (var i = 0; i < storedData.length; i++){
+                var userData = storedData[i];
+
+               if (userData.email === validEmail){
+                return true;
+               }
+            }
+    
+           return false;
+        }
+
+        var email = $('#email').val();
+
+        if (usernameValidator(email)){
+            emailError.text('Username is valid').css('color', 'green');
+            newUsernameInput.prop('disabled', false);
+            confirmUsernameInput.prop('disabled', false);
+            submitButton.prop('disabled', false);
+        }else{
+            emailError.text('Username is not valid').css('color', 'red');
+            newUsernameInput.prop('disabled', true);
+            confirmUsernameInput.prop('disabled', true);
             submitButton.prop('disabled', true);
         }
 
@@ -352,6 +421,45 @@ $(document).ready(function(){
             localStorage.setItem('dataList', JSON.stringify(storedData));
             window.location.href = "login.html";
             alert("Password changed successfully!!");
+        }
+
+    });
+});
+
+$(document).ready(function(){
+    $('#fgUnButton').on('click', function(){
+        $('#UsernameError').text('');
+        $('#UsernameError1').text('');
+
+        var storedData = JSON.parse(localStorage.getItem('dataList'));
+
+        var emailChange = $('#email').val();
+
+        var userIndex = storedData.findIndex(function(user){
+            return user.email === emailChange;
+        });
+
+        var username = $('#username').val();
+        var confirmUsername = $('#confirmUsername').val();
+
+        if(username === ""){
+            $('#usernameError').text('Username is required');
+            return
+        }else if (!/^[a-zA-Z0-9_]+$/.test(username)){
+            $('#usernameError').text('Username must only consists of letters, numbers, and underscore only')
+        }else{
+            $('#UsernameError').text('');
+        }
+
+        if(username != confirmUsername){
+                $('#usernameError1').text('Usernames not match'); 
+        }else{
+            $('#UsernameError').text('');
+            $('#UsernameError1').text('');
+            storedData[userIndex].username = username;
+            localStorage.setItem('dataList', JSON.stringify(storedData));
+            window.location.href = "login.html";
+            alert("Username changed successfully!!");
         }
 
     });

@@ -52,60 +52,56 @@ $(document).ready(function(){
 
 
 
-function validateForm() {
-    // Clear previous error messages
-    document.getElementById("usernameError").innerText = "";
-    document.getElementById("passwordError").innerText = "";
+// function validateForm() {
 
-    // Get values of username and password fields
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+//     document.getElementById("usernameError").innerText = "";
+//     document.getElementById("passwordError").innerText = "";
 
-    if (username.trim() === "" && password.trim() === "") {
-        document.getElementById("usernameError").innerText = "Username is required";
-        document.getElementById("passwordError").innerText = "Password is required";
-        return;
-    }
+//     var username = document.getElementById("username").value;
+//     var password = document.getElementById("password").value;
+
+//     if (username.trim() === "" && password.trim() === "") {
+//         document.getElementById("usernameError").innerText = "Username is required";
+//         document.getElementById("passwordError").innerText = "Password is required";
+//         return;
+//     }
+
+//     if (username.trim() === "") {
+//         document.getElementById("usernameError").innerText = "Username is required";
+//         return;
+//     } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+//         document.getElementById('usernameError').innerText = 'Username can only contain letters, numbers, and underscores.';
+//         return;
+//     }else{
+//         document.getElementById("usernameError").innerText = "";
+//     }
+
+//     if (password.trim() === "") {
+//         document.getElementById("passwordError").innerText = "Password is required";
+//         return;
+//     }else{
+//         document.getElementById("passwordError").innerText = "";
+//     }
 
 
-    // Check if username is empty
-    if (username.trim() === "") {
-        document.getElementById("usernameError").innerText = "Username is required";
-        return;
-    } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-        document.getElementById('usernameError').innerText = 'Username can only contain letters, numbers, and underscores.';
-        return;
-    }else{
-        document.getElementById("usernameError").innerText = "";
-    }
-    // Check if password is empty
-    if (password.trim() === "") {
-        document.getElementById("passwordError").innerText = "Password is required";
-        return;
-    }else{
-        document.getElementById("passwordError").innerText = "";
-    }
+//     console.log("Username: " + username);
+//     console.log("Password: " + password);
+// }
 
-    // If both fields are filled, proceed with login
-    console.log("Username: " + username);
-    console.log("Password: " + password);
-}
+// function validatePassword() {
 
-function validatePassword() {
+//     document.getElementById("passwordError1").innerText= "";
 
-    document.getElementById("passwordError1").innerText= "";
+//     var password = document.getElementById("password").value;
+//     var confirmPassword = document.getElementById("confirmPassword").value;
 
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirmPassword").value;
+//     if (password != confirmPassword) {
+//         document.getElementById("passwordError1").innerText = "Password not match";
+//         return false;
+//     }
 
-    // Check if the confirm password match in new password
-    if (password != confirmPassword) {
-        document.getElementById("passwordError1").innerText = "Password not match";
-        return false;
-    }
-
-    return true;
-}
+//     return true;
+// }
 
 // function saveData() {
 
@@ -128,11 +124,9 @@ $(document).ready(function(){
     $('#sgSubmit').on('click', function(){
         var username = $('#username').val();
         var password = $('#password').val();
-        var userData = {
-            username: username,
-            password: password
-        };
-        var jsonData = JSON.stringify(userData);
+        
+        var exData = localStorage.getItem('dataList');
+        var exUser = exData ? JSON.parse(exData):[ ];
 
         if (username.trim() === "" && password.trim() === ""){
             $('#usernameError').text('Please fill up this field.');
@@ -151,10 +145,26 @@ $(document).ready(function(){
         }else{
             $('#usernameError').text('')
             $('#passwordError').text('')
-            localStorage.setItem('userData', jsonData)
-            window.location.href = "login.html";
-            alert("Data saved successfully.")
+
+            var userData = {
+                username: username,
+                password: password
+            }
+
+            exUser.push(userData);
+
+            localStorage.setItem('dataList', JSON.stringify(exUser));
+    
+    
+           window.location.href = "login.html";
+             alert ("Data saved successfully");
         };
+
+
+
+        // localStorage.setItem('userData', jsonData)
+        // window.location.href = "login.html";
+        // alert("Data saved successfully.")
     });
 });
 
@@ -200,10 +210,22 @@ $(document).ready(function(){
     $('#liSubmit').on('click', function(){
         var username = $('#username').val();
         var password = $('#password').val();
-        var userData = JSON.parse(localStorage.getItem('userData'));
+        var userList = JSON.parse(localStorage.getItem('dataList'));
+
+        if (!userList || userList.length === 0){
+            alert ("No user data found, sign up first");
+            return;
+        }
+
+        var userFound = false;
+
+        for (var i = 0; i < userList.length; i++){
+            var userData = userList[i];
+        }
 
         if (userData && userData.username === username && userData.password === password){
-            alert("Login Successfully!!")
+            userFound = true;
+            alert("Login Successfully!!");
         }else{
             if (username.trim() === "" && password.trim() === ""){
             $('#usernameError').text('Username is required');
@@ -228,74 +250,147 @@ $(document).ready(function(){
    });
 }); 
 
-function usernameValidator(validUsername){
+// function usernameValidator(validUsername){
 
-    var storedData = localStorage.getItem('userData');
+//     var storedData = localStorage.getItem('userData');
 
-    var parsedData = JSON.parse(storedData);
+//     var parsedData = JSON.parse(storedData);
 
-    return parsedData && parsedData.username === validUsername;
-}
+//     return parsedData && parsedData.username === validUsername;
+// }
 
-function fgPasswordCondition() {
+// $(document).ready(function(){
+//     function usernameValidator(validUsername){
+//         var storedData = localStorage.getItem('userData');
 
-    var username = document.getElementById("username").value;
-    var usernameError = document.getElementById('usernameError');
-    var newPasswordInput = document.getElementById('password');
-    var confirmPasswordInput = document.getElementById('confirmPassword');
-    var submitButton = document.getElementById('fgButton');
+//         return (storedData !== null) && (JSON.parse(storedData).username == validUsername);
+//     }
+// });
 
-    if (usernameValidator(username)){
-        usernameError.innerText = 'Username is valid.';
-        usernameError.style.color = 'green';
-        newPasswordInput.disabled = false;
-        confirmPasswordInput.disabled = false;
-        submitButton.disabled = false;
-    }else{
-        usernameError.innerText = 'Username not valid.';
-        usernameError.style.color = 'red';
-        newPasswordInput.disabled = true;
-        confirmPasswordInput.disabled = true;
-        submitButton.disabled = true;
-    }
-}
+$(document).ready(function(){
 
-function changePassword () {
+    var usernameError = $('#usernameError');
+    var newPasswordInput = $('#password');
+    var confirmPasswordInput = $('#confirmPassword');
+    var submitButton = $('#fgButton');
+
+    $('#unChecker').on('click',function(){
+        function usernameValidator(validUsername){
+            var storedData = JSON.parse(localStorage.getItem('dataList'));
+
+            for (var i = 0; i < storedData.length; i++){
+                var userData = storedData[i];
+            }
     
-    document.getElementById("passwordError").innerText = "";
-    document.getElementById("passwordError1").innerText= "";
+            return (storedData !== null) && (userData.username == validUsername);
+        }
 
-    var storedData = localStorage.getItem('userData');
-    var parsedData = JSON.parse(storedData);
-    var password = document.getElementById("password");
-    var confirmPassword = document.getElementById('confirmPassword');
+        var username = $('#username').val();
+
+        if (usernameValidator(username)){
+            usernameError.text('Username is valid').css('color', 'green');
+            newPasswordInput.prop('disabled', false);
+            confirmPasswordInput.prop('disabled', false);
+            submitButton.prop('disabled', false);
+        }else{
+            usernameError.text('Username is not valid').css('color', 'red');
+            newPasswordInput.prop('disabled', true);
+            confirmPasswordInput.prop('disabled', true);
+            submitButton.prop('disabled', true);
+        }
+
+    });
+});
+
+// function fgPasswordCondition() {
+
+//     var username = document.getElementById("username").value;
+//     var usernameError = document.getElementById('usernameError');
+//     var newPasswordInput = document.getElementById('password');
+//     var confirmPasswordInput = document.getElementById('confirmPassword');
+//     var submitButton = document.getElementById('fgButton');
+
+//     if (usernameValidator(username)){
+//         usernameError.innerText = 'Username is valid.';
+//         usernameError.style.color = 'green';
+//         newPasswordInput.disabled = false;
+//         confirmPasswordInput.disabled = false;
+//         submitButton.disabled = false;
+//     }else{
+//         usernameError.innerText = 'Username not valid.';
+//         usernameError.style.color = 'red';
+//         newPasswordInput.disabled = true;
+//         confirmPasswordInput.disabled = true;
+//         submitButton.disabled = true;
+//     }
+// }
+
+
+$(document).ready(function(){
+    $('#fgButton').on('click', function(){
+        var storedData = JSON.parse(localStorage.getItem('dataList'));
+
+        var userChange = $('#username').val();
+
+        var userIndex = storedData.findIndex(function(user){
+            return user.username === userChange;
+        });
+
+        var password = $('#password').val();
+        var confirmPassword = $('#confirmPassword').val();
+
+        if(password === ""){
+            $('#passwordError').text('Password is required');
+            return
+        }else{
+            $('#passwordError').text('');
+        }
+
+        if(password != confirmPassword){
+                $('#passwordError1').text('Password not match'); 
+        }else{
+            
+            storedData[userIndex].password = password;
+            localStorage.setItem('dataList', JSON.stringify(storedData));
+            window.location.href = "login.html";
+            alert("Password changed successfully!!");
+        }
+
+    });
+});
+
+// function changePassword () {
+    
+//     document.getElementById("passwordError").innerText = "";
+//     document.getElementById("passwordError1").innerText= "";
+
+//     var storedData = localStorage.getItem('userData');
+//     var parsedData = JSON.parse(storedData);
+//     var password = document.getElementById("password");
+//     var confirmPassword = document.getElementById('confirmPassword');
 
    
    
 
-    if (password.value.trim() === "") {
-        document.getElementById("passwordError").innerText = "Password is required";
-        return;
-    }else{
-        document.getElementById("passwordError").innerText = "";
-    }
+//     if (password.value.trim() === "") {
+//         document.getElementById("passwordError").innerText = "Password is required";
+//         return;
+//     }else{
+//         document.getElementById("passwordError").innerText = "";
+//     }
 
-    // if (confirmPassword.value.trim === ""){
-    //     document.getElementById("passwordError1").innerText = "Please cofirm your password";
-    // }
-
-    if (password.value != confirmPassword.value) {
-        document.getElementById("passwordError1").innerText = "Password not match";
-        return false;
-    }else{
-        parsedData.password = password.value;
-        localStorage.setItem('userData',JSON.stringify(parsedData));
-        alert("Password changed successfully");
-        goToLoginPage()
-        return true;
+//     if (confirmPassword.value.trim() === ""){
+//         document.getElementById("passwordError1").innerText = "Please fill up the form"
+//         return false;
+//     }else if(password.value != confirmPassword.value) {
+//         document.getElementById("passwordError1").innerText = "Password not match";
+//     }else{
+//         parsedData.password = password.value;
+//         localStorage.setItem('userData',JSON.stringify(parsedData));
+//         alert("Password changed successfully");
+//         goToLoginPage()
+//         return true;
         
-    }
+//     }  
 
-    
-
-}
+// }

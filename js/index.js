@@ -160,11 +160,6 @@ $(document).ready(function(){
              alert ("Data saved successfully");
         };
 
-
-
-        // localStorage.setItem('userData', jsonData)
-        // window.location.href = "login.html";
-        // alert("Data saved successfully.")
     });
 });
 

@@ -216,32 +216,35 @@ $(document).ready(function(){
 
         for (var i = 0; i < userList.length; i++){
             var userData = userList[i];
-        }
 
-        if (userData && userData.username === username && userData.password === password){
-            userFound = true;
-            alert("Login Successfully!!");
-        }else{
+            if (userData.username === username && userData.password === password){
+                userFound = true;
+                $('#usernameError').text('');
+                $('#passwordError').text('');
+                alert("Login Successfully!!");
+            }
+        }
+        
+
+        if(!userFound){
             if (username.trim() === "" && password.trim() === ""){
-            $('#usernameError').text('Username is required');
-            $('#passwordError').text('Password is required');
-            return;
-        }
-
-        if (username.trim() === ""){
-            $('usernameError').text('Username is required.');
-            return;
-        }else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-            $('#usernameError').text('You input invalid content, Try again.');
-            return;
-        }else if (password.trim() === ""){
-            $('#passwordError').text('Password is required');
-        }else{
-            $('#usernameError').text('');
-            $('#passwordError').text('');
-            alert("Invalid credentials, please try again.");
-        }      
-      }       
+                $('#usernameError').text('Username is required');
+                $('#passwordError').text('Password is required');
+                return;
+            }else if (username.trim() === ""){
+                $('usernameError').text('Username is required.');
+                return;
+            } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                $('#usernameError').text('You input invalid content, Try again.');
+                return;
+            }  else if (password.trim() === ""){
+                $('#passwordError').text('Password is required');
+            }else{
+                $('#usernameError').text('');
+                $('#passwordError').text('');
+                alert("Invalid credentials, please try again.");
+            } 
+        } 
    });
 }); 
 

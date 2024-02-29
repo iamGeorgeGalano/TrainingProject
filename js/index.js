@@ -226,6 +226,7 @@ $(document).ready(function(){
 
         var username = $('#username').val();
         var confirmUsername = $('#confirmUsername').val();
+        
 
         if(username === ""){
             $('#usernameError').text('Username is required');

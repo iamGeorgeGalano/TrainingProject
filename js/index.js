@@ -38,35 +38,67 @@ $(document).ready(function(){
         var exData = localStorage.getItem('dataList');
         var exUser = exData ? JSON.parse(exData):[ ];
         var emailExist = exUser.some(function(user){
-            return user.email == email;
+            return user.email === email;
         });
+        var usernameExist = exUser.some((user) => {
+            return user.username === username;
+        });
+
+        var dataValid = true;
 
         if (username.trim() === "" && password.trim() === "" && email.trim() == ""){
             $('#usernameError').text('Please fill up this field.');
             $('#passwordError').text('Please fill up this field.');
             $('#emailError').text('Please fill up this field.');
+            dataValid = false;
         }else{
             $('#usernameError').text('');
             $('#passwordError').text('');
             $('#emailError').text('');
         }
 
-        if (username.trim()===""){
-            $('#usernameError').text('Please fill up this field.');
-        }else if (!/^[a-zA-Z0-9_]+$/.test(username)){
-            $('#usernameError').text('Username must only consists of letters, numbers, and underscore only')
-        }else if(password.trim()===""){
-            $('#passwordError').text('Please fill up this field');
-        }else if (email.trim() === ""){
-            $('#emailError').text('Please fill up this field.');
-        }else if(!validateEmail(email)){
-            $('#emailError').text('Please input valid email address');
-        }else if (emailExist){
-            $('#emailError').text('Email exists, use another email.')
+        if (username.trim()==="" || !/^[a-zA-Z0-9_]+$/.test(username) || (usernameExist)){
+            if (username.trim () === ""){
+                $('#usernameError').text('Please fill up this field.');
+                dataValid = false;
+            }else if (!/^[a-zA-Z0-9_]+$/.test(username)){
+                $('#usernameError').text('Username must only consists of letters, numbers, and underscore only');
+                dataValid = false;
+            }else if(usernameExist){
+                $('#usernameError').text('Username has already taken.');
+                dataValid = false;
+            }
+        }else{
+            $('#usernameError').text('');
+        }
+
+        if (password.trim()==="" || password.length < 6 || password.length > 12){
+            if (password.trim()===""){
+                $('#passwordError').text('Please fill up this field');
+                dataValid = false;
+            }else if (password.length < 6 || password.length > 12){
+                $('#passwordError').text('Passwords must be 6 to 12 characters long.');
+            }
         }else {
-            $('#usernameError').text('')
-            $('#passwordError').text('')
-            $('#emailError').text('')
+            $('#passwordError').text('');
+        }
+         
+        if(email.trim() === "" || !validateEmail(email) || (emailExist)){
+            if (email.trim() === ""){
+                $('#emailError').text('Please fill up this field.');
+                dataValid = false;
+            }else if(!validateEmail(email)){
+                $('#emailError').text('Please input valid email address');
+                dataValid = false;
+            }else if (emailExist){
+                $('#emailError').text('Email exists, use another email.');
+                dataValid = false;
+            }
+        }else {
+            $('#emailError').text(''); 
+        }
+
+        if (dataValid){
 
             var userData = {
                 username: username,
@@ -77,12 +109,11 @@ $(document).ready(function(){
             exUser.push(userData);
 
             localStorage.setItem('dataList', JSON.stringify(exUser));
-    
-    
-           window.location.href = "login.html";
-             alert ("Data saved successfully");
-        };
 
+
+            window.location.href = "login.html";
+            alert ("Data saved successfully");
+        }
     });
 
 

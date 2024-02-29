@@ -145,14 +145,24 @@ $(document).ready(function(){
             if (username.trim() === "" && password.trim() === ""){
                 $('#usernameError').text('Username is required');
                 $('#passwordError').text('Password is required');
-                return;
-            }else if (username.trim() === ""){
-                $('usernameError').text('Username is required.');
-                return;
-            } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-                $('#usernameError').text('You input invalid content, Try again.');
-                return;
-            }  else if (password.trim() === ""){
+                
+            }else {
+                $('#usernameError').text('');
+                $('#passwordError').text('');
+            }
+            
+            if (username.trim() === "" || !/^[a-zA-Z0-9_]+$/.test(username)){
+                if(username.trim() === ""){
+                    $('usernameError').text('Username is required.');
+                }else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                    $('#usernameError').text('You input invalid content, Try again.');
+    
+                }
+            }else{
+                $('#usernameError').text('');
+            }
+            
+            if (password.trim() === ""){
                 $('#passwordError').text('Password is required');
             }else{
                 $('#usernameError').text('');
@@ -162,41 +172,7 @@ $(document).ready(function(){
         } 
    });
 
-    var usernameError = $('#usernameError');
-    var newPasswordInput = $('#password');
-    var confirmPasswordInput = $('#confirmPassword');
-    var submitButton = $('#fgButton');
-
-    $('#unChecker').on('click',function(){
-        function usernameValidator(validUsername){
-            var storedData = JSON.parse(localStorage.getItem('dataList'));
-
-            for (var i = 0; i < storedData.length; i++){
-                var userData = storedData[i];
-
-               if (userData.username === validUsername){
-                return true;
-               }
-            }
     
-           return false;
-        }
-
-        var username = $('#username').val();
-
-        if (usernameValidator(username)){
-            usernameError.text('Username is valid').css('color', 'green');
-            newPasswordInput.prop('disabled', false);
-            confirmPasswordInput.prop('disabled', false);
-            submitButton.prop('disabled', false);
-        }else{
-            usernameError.text('Username is not valid').css('color', 'red');
-            newPasswordInput.prop('disabled', true);
-            confirmPasswordInput.prop('disabled', true);
-            submitButton.prop('disabled', true);
-        }
-
-    });
 
     var emailError = $('#emailError');
     var newUsernameInput = $('#username');
@@ -204,7 +180,7 @@ $(document).ready(function(){
     var submitButton = $('#fgUnButton');
 
     $('#emChecker').on('click',function(){
-        function usernameValidator(validEmail){
+        function emailValidator(validEmail){
             var storedData = JSON.parse(localStorage.getItem('dataList'));
 
             for (var i = 0; i < storedData.length; i++){
@@ -220,7 +196,7 @@ $(document).ready(function(){
 
         var email = $('#email').val();
 
-        if (usernameValidator(email)){
+        if (emailValidator(email)){
             emailError.text('Email is valid').css('color', 'green');
             newUsernameInput.prop('disabled', false);
             confirmUsernameInput.prop('disabled', false);
@@ -234,36 +210,7 @@ $(document).ready(function(){
 
     });
 
-    $('#fgButton').on('click', function(){
-        var storedData = JSON.parse(localStorage.getItem('dataList'));
-
-        var userChange = $('#username').val();
-
-        var userIndex = storedData.findIndex(function(user){
-            return user.username === userChange;
-        });
-
-        var password = $('#password').val();
-        var confirmPassword = $('#confirmPassword').val();
-
-        if(password === ""){
-            $('#passwordError').text('Password is required');
-            return
-        }else{
-            $('#passwordError').text('');
-        }
-
-        if(password != confirmPassword){
-                $('#passwordError1').text('Password not match'); 
-        }else{
-            
-            storedData[userIndex].password = password;
-            localStorage.setItem('dataList', JSON.stringify(storedData));
-            window.location.href = "login.html";
-            alert("Password changed successfully!!");
-        }
-
-    });
+    
 
     $('#fgUnButton').on('click', function(){
         $('#UsernameError').text('');
@@ -303,6 +250,76 @@ $(document).ready(function(){
     });
     
 });
+
+$(document).ready(function(){
+    var usernameError = $('#usernameError');
+    var newPasswordInput = $('#password');
+    var confirmPasswordInput = $('#confirmPassword');
+    var submitButton = $('#fgButton');
+
+    $('#unChecker').on('click',function(){
+        function usernameValidator(validUsername){
+            var storedData = JSON.parse(localStorage.getItem('dataList'));
+
+            for (var i = 0; i < storedData.length; i++){
+                var userData = storedData[i];
+
+               if (userData.username === validUsername){
+                return true;
+               }
+            }
+    
+           return false;
+        }
+
+        var username = $('#username').val();
+
+        if (usernameValidator(username)){
+            usernameError.text('Username is valid').css('color', 'green');
+            newPasswordInput.prop('disabled', false);
+            confirmPasswordInput.prop('disabled', false);
+            submitButton.prop('disabled', false);
+        }else{
+            usernameError.text('Username is not valid').css('color', 'red');
+            newPasswordInput.prop('disabled', true);
+            confirmPasswordInput.prop('disabled', true);
+            submitButton.prop('disabled', true);
+        }
+
+    });
+
+    $('#fgButton').on('click', function(){
+        var storedData = JSON.parse(localStorage.getItem('dataList'));
+
+        var userChange = $('#username').val();
+
+        var userIndex = storedData.findIndex(function(user){
+            return user.username === userChange;
+        });
+
+        var password = $('#password').val();
+        var confirmPassword = $('#confirmPassword').val();
+
+        if(password === ""){
+            $('#passwordError').text('Password is required');
+            return
+        }else{
+            $('#passwordError').text('');
+        }
+
+        if(password != confirmPassword){
+                $('#passwordError1').text('Password not match'); 
+        }else{
+            
+            storedData[userIndex].password = password;
+            localStorage.setItem('dataList', JSON.stringify(storedData));
+            window.location.href = "login.html";
+            alert("Password changed successfully!!");
+        }
+
+    });
+
+})
 
 
 // var input =document.getElementById("username");

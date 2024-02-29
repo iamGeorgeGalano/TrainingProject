@@ -167,6 +167,42 @@ $(document).ready(function(){
 
     });
 
+    var emailError = $('#emailError');
+    var newUsernameInput = $('#username');
+    var confirmUsernameInput = $('#confirmUsername');
+    var submitButton = $('#fgUnButton');
+
+    $('#emChecker').on('click',function(){
+        function usernameValidator(validEmail){
+            var storedData = JSON.parse(localStorage.getItem('dataList'));
+
+            for (var i = 0; i < storedData.length; i++){
+                var userData = storedData[i];
+
+               if (userData.email === validEmail){
+                return true;
+               }
+            }
+    
+           return false;
+        }
+
+        var email = $('#email').val();
+
+        if (usernameValidator(email)){
+            emailError.text('Email is valid').css('color', 'green');
+            newUsernameInput.prop('disabled', false);
+            confirmUsernameInput.prop('disabled', false);
+            submitButton.prop('disabled', false);
+        }else{
+            emailError.text('Email is not valid').css('color', 'red');
+            newUsernameInput.prop('disabled', true);
+            confirmUsernameInput.prop('disabled', true);
+            submitButton.prop('disabled', true);
+        }
+
+    });
+
     $('#fgButton').on('click', function(){
         var storedData = JSON.parse(localStorage.getItem('dataList'));
 
